@@ -64,7 +64,7 @@ def check_column_distribution(df):
     # Check column distribution, skewness, and kurtosis
     skew = df.skew()
     kurtosis = df.kurtosis()
-    return df
+    return skew, kurtosis
 
 def check_for_outliers(df):
     """Check for outliers in the data.
