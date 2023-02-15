@@ -3,23 +3,22 @@ import seaborn as sns
 import numpy as np
 
 
-def plot_correlation_matrix(df, title):
+def plot_correlation_matrix(corr, title):
     """Plot correlation matrix in the data.
-    
+
     Args:
-        df (pandas.DataFrame): Dataframe containing the data.
+        corr (pandas.DataFrame): Dataframe containing the correlation matrix.
         title (str): Title of the plot.
-        
+
     Returns:
         df (pandas.DataFrame): Dataframe containing the data with correlation matrix.
     """
     # Plot correlation matrix
-    corr = df.corr()
     fig, ax = plt.subplots(figsize=(10, 10))
-    sns.heatmap(corr, annot=True, fmt='.2f', ax=ax)
+    sns.heatmap(corr, annot=True, ax=ax)
     ax.set_title(title)
     plt.show()
-    return df
+    return corr
 
 def plot_count_plot(df, column, hue, title):
     """Plot count plot in the data.
