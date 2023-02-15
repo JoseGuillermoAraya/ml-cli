@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def check_missing_values(df):
     """Check for missing values in a DataFrame and return a new DataFrame with the number and percentage of missing values for each column.
