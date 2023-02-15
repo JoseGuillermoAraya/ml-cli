@@ -1,5 +1,4 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 
 def check_missing_values(df):
     """Check for missing values in a DataFrame and return a new DataFrame with the number and percentage of missing values for each column.
@@ -95,4 +94,17 @@ def check_for_outliers(df):
     """
     # Check for outliers
     df = df.boxplot()
+    return df
+
+def check_correlation(df):
+    """Check correlation in the data.
+    
+    Args:
+        df (pandas.DataFrame): Dataframe containing the data.
+        
+    Returns:
+        df (pandas.DataFrame): Dataframe containing the data with correlation.
+    """
+    # Check correlation
+    df = df.corr(numeric_only=True)
     return df
