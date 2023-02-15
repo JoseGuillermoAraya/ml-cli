@@ -1,8 +1,7 @@
 import pandas as pd
 
 def check_missing_values(df):
-    """Check for missing values in the data. Returns a dataframe with
-    the amount of missing values in each column and the percentage of missing values
+    """Check for missing values in a DataFrame and return a new DataFrame with the number and percentage of missing values for each column.
     
     Args:
         df (pandas.DataFrame): Dataframe containing the data.
@@ -11,11 +10,10 @@ def check_missing_values(df):
         df (pandas.DataFrame): Dataframe containing the data with missing values.
     """
     # Check for missing values
-    df = df.isnull().sum()
-    df = df[df > 0]
-    df = df.sort_values(ascending=False)
-    df = pd.DataFrame(df, columns=['Missing Values'])
-    df['% Missing Values'] = df['Missing Values'] / len(df) * 100
+    missing_values = df.isnull().sum()
+    missing_percent = round(df.isnull().sum() / df.shape[0] * 100, 2)
+    df = pd.concat([missing_values, missing_percent], axis=1, keys=['Missing Values', 'Missing Percent'])
+    df = df[df.iloc[:,1] != 0].sort_values('Missing Percent', ascending=False).round(1)
     return df
 
 def check_data_types(df):
