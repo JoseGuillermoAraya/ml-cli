@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "titanic-problem"
+version = "0.1.0"
+description = "A CLI to evaluate and train a ML model over the titanic problem data"
+authors = ["JoseGuillermoAraya <jose.araya@bci.cl>"]
+readme = "README.md"
+packages = [{include = "titanic_problem"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
