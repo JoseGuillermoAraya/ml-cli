@@ -49,7 +49,7 @@ def plot_count_plot(df, column, hue, title):
     ax.set_title(title)
     plt.show()
 
-def plot_cat_plot(df, x_column, y_column, hue, title):
+def plot_cat_plot(df, x_column, y_column, hue=None, col=None, title=None):
     """Plot cat plot in the data.
     
     Args:
@@ -60,7 +60,7 @@ def plot_cat_plot(df, x_column, y_column, hue, title):
         title (str): Title of the plot.
     """
     # Plot cat plot
-    sns.catplot(x=x_column, y=y_column, hue=hue, data=df, kind='point', estimator=np.mean)
+    sns.catplot(x=x_column, y=y_column, hue=hue, col=col, data=df, kind='point', estimator=np.mean)
     plt.show()
 
 def plot_violin_plot(df, x_column, y_column, hue, title):
