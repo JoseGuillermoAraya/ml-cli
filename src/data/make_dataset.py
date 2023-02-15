@@ -16,8 +16,8 @@ def split_data(df, target):
     return X, y
 
 def main():
-    """Load data, split into X and y, save to data/processed"""
+    """Load data, split into X and y, save to data/intermediate"""
     df = load_data("data/raw/train.csv")
     X, y = split_data(df, "Survived")
-    save_data(X, "data/processed/X.csv")
-    save_data(y, "data/processed/y.csv")
+    save_data(X, "data/intermediate/X.csv")
+    save_data(y, "data/intermediate/y.csv")
