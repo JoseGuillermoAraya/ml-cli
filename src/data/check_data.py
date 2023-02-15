@@ -55,7 +55,20 @@ def check_data_distribution(df):
     df = df.describe()
     return df
 
-def check_column_distribution(df):
+def check_categorical_data_distribution(df):
+    """Check categorical data distribution in the data.
+    
+    Args:
+        df (pandas.DataFrame): Dataframe containing the data.
+        
+    Returns:
+        df (pandas.DataFrame): Dataframe containing the data with categorical data distribution.
+    """
+    # Check categorical data distribution
+    df = df.describe(include=['O'])
+    return df
+
+def check_data_skew_and_kurt(df):
     """Check column distribution, skewness, and kurtosis in the data.
     
     Args:
@@ -65,9 +78,10 @@ def check_column_distribution(df):
         df (pandas.DataFrame): Dataframe containing the data with column distribution.
     """
     # Check column distribution, skewness, and kurtosis
-    skew = df.skew()
-    kurtosis = df.kurtosis()
-    return skew, kurtosis
+    skew = df.skew(numeric_only=True)
+    kurtosis = df.kurtosis(numeric_only=True)
+    df = pd.concat([skew, kurtosis], axis=1, keys=['Skew', 'Kurtosis'])
+    return df
 
 def check_for_outliers(df):
     """Check for outliers in the data.
