@@ -171,3 +171,49 @@ def encode_categorical_features(df, features):
     df = df.drop(features, axis=1)
 
     return df
+
+def main():
+    # Read data
+    train_df = pd.read_csv('data/train.csv')
+    test_df = pd.read_csv('data/test.csv')
+
+    # Drop features
+    features_to_drop = ['PassengerId', 'Cabin']
+    train_df = drop_features(train_df, features_to_drop)
+    test_df = drop_features(test_df, features_to_drop)
+
+    # Create title feature
+    train_df = create_title_feature(train_df)
+    test_df = create_title_feature(test_df)
+
+    # Group titles
+    train_df = group_titles(train_df)
+    test_df = group_titles(test_df)
+
+    # Impute missing values
+    train_df = impute_feature_with_mean_of_group(train_df, "Age", "Title")
+    train_df = impute_missing_values(train_df, "Embarked", "most_frequent")
+    test_df = impute_feature_with_mean_of_group(test_df, "Age", "Title")
+    test_df = impute_missing_values(test_df, "Fare", "mean")
+
+    # Feature engineering
+    train_df = create_band_feature(train_df, "Age", "AgeBand", 10)
+    train_df = create_feature_sum(train_df, ["SibSp", "Parch"], "FamilySize", 1)
+    train_df = create_feature_from_column(train_df, "FamilySize", "IsAlone", lambda x: 1 if x == 1 else 0)
+    train_df = create_band_feature(train_df, "Fare", "FareBand", 4)
+    test_df = create_band_feature(test_df, "Age", "AgeBand", 10)
+    test_df = create_feature_sum(test_df, ["SibSp", "Parch"], "FamilySize", 1)
+    test_df = create_feature_from_column(test_df, "FamilySize", "IsAlone", lambda x: 1 if x == 1 else 0)
+    test_df = create_band_feature(test_df, "Fare", "FareBand", 4)
+
+    # Encode categorical features
+    train_df = encode_categorical_features(train_df, ['Sex', 'Embarked', 'Title'])
+    test_df = encode_categorical_features(test_df, ['Sex', 'Embarked', 'Title'])
+
+    # Drop features
+    train_df = drop_features(train_df, ['Name', 'Age', 'Fare', 'Ticket'])
+    test_df = drop_features(test_df, ['Name', 'Age', 'Fare', 'Ticket'])
+
+    # Save data
+    train_df.to_csv('data/processed/train.csv', index=False)
+    test_df.to_csv('data/processed/test.csv', index=False)
