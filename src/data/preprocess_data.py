@@ -3,6 +3,21 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
 
+def drop_features(df, features):
+    """Drop features from the data.
+    
+    Args:
+        df (pandas.DataFrame): Dataframe containing the data.
+        features (list): List of features to drop.
+        
+    Returns:
+        df (pandas.DataFrame): Dataframe containing the data with dropped features.
+    """
+    # Drop features
+    df = df.drop(features, axis=1)
+    
+    return df
+
 def impute_missing_values(df, strategy='mean'):
     """Impute missing values in the data.
     
