@@ -18,6 +18,25 @@ def drop_features(df, features):
     
     return df
 
+def impute_feature_with_mean_of_group(df, feature, group):
+    """Impute feature with mean of that feature for a group
+    of another feature in the data using Simple Imputer.
+
+    Args:
+        df (pandas.DataFrame): Dataframe containing the data.
+        feature (str): Feature to impute.
+        group (str): Group to impute feature with mean of.
+
+    Returns:
+        df (pandas.DataFrame): Dataframe containing the data with imputed feature.
+    """
+    # Impute feature with mean of that feature for a group of another feature
+    imputer = SimpleImputer(strategy='mean')
+    grouped = df.groupby(group)[feature].transform(lambda x: x.fillna(x.mean()))
+    df[feature] = imputer.fit_transform(grouped.values.reshape(-1, 1))
+    
+    return df
+
 def impute_missing_values(df, strategy='mean'):
     """Impute missing values in the data.
     
