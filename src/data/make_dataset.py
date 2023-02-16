@@ -15,9 +15,12 @@ def split_data(df, target):
     y = df[target]
     return X, y
 
-def main():
-    """Load data, split into X and y, save to data/intermediate"""
-    df = load_data("data/raw/train.csv")
-    X, y = split_data(df, "Survived")
-    save_data(X, "data/intermediate/X.csv")
-    save_data(y, "data/intermediate/y.csv")
+def make_dataset(data_path, target):
+    """Make dataset from data path and target"""
+    # Load data
+    df = load_data(data_path)
+    
+    # Split data
+    X, y = split_data(df, target)
+    
+    return X, y
