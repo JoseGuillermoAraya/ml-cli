@@ -37,18 +37,20 @@ def impute_feature_with_mean_of_group(df, feature, group):
     
     return df
 
-def impute_missing_values(df, strategy='mean'):
-    """Impute missing values in the data.
+def impute_missing_values(df, feature, strategy='mean'):
+    """Impute missing values in the data using Simple Imputer.
     
     Args:
         df (pandas.DataFrame): Dataframe containing the data.
+        feature (str): Feature to impute.
+        strategy (str): Strategy to impute missing values.
         
     Returns:
-        df (pandas.DataFrame): Dataframe containing the data with imputed missing values.
+        df (pandas.DataFrame): Dataframe containing the data with imputed feature.
     """
     # Impute missing values
     imputer = SimpleImputer(strategy=strategy)
-    df = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)
+    df[feature] = imputer.fit_transform(df[feature].values.reshape(-1, 1))
     
     return df
 
