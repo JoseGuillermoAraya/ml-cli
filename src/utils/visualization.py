@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
-def plot_histogram(df, column, hue, title):
+def plot_histogram(df, column, hue=None, title=None):
     """Plot a histogram of a numerical column in a DataFrame, for each value of a categorical variable.
 
     Args:
