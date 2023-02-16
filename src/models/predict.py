@@ -1,4 +1,5 @@
 import pandas as pd
+from src.data.preprocess_data import preprocess_data
 import joblib
 
 def predict(input_data, model_path):
@@ -7,8 +8,11 @@ def predict(input_data, model_path):
     # Load trained model
     model = joblib.load(model_path)
     
-    # Load input data
+    # Load data
     data = pd.read_csv(input_data)
+
+    # Preprocess data
+    data = preprocess_data(data)
     
     # Make predictions
     predictions = model.predict(data)
