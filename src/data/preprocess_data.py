@@ -55,21 +55,6 @@ def impute_missing_values(df, feature, strategy='mean'):
     
     return df
 
-def normalize_data(df):
-    """Normalize the data.
-    
-    Args:
-        df (pandas.DataFrame): Dataframe containing the data.
-        
-    Returns:
-        df (pandas.DataFrame): Dataframe containing the normalized data.
-    """
-    # Normalize the data
-    scaler = StandardScaler()
-    df = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
-    
-    return df
-
 def encode_categorical_data(df):
     """Encode categorical data.
     
@@ -165,24 +150,5 @@ def create_feature_from_column(df, feature, title, function):
     """
     # Create feature from column
     df[title] = df[feature].apply(function)
-    
-    return df
-
-def feature_engineering(df):
-    """Feature engineering.
-    
-    Args:
-        df (pandas.DataFrame): Dataframe containing the data.
-        
-    Returns:
-        df (pandas.DataFrame): Dataframe containing the data with engineered features.
-    """
-    # Feature engineering
-    df['FamilySize'] = df['SibSp'] + df['Parch'] + 1
-    df['IsAlone'] = 1
-    df['IsAlone'].loc[df['FamilySize'] > 1] = 0
-    df['Title'] = df['Name'].str.split(", ", expand=True)[1].str.split(".", expand=True)[0]
-    df['FareBin'] = pd.qcut(df['Fare'], 4)
-    df['AgeBin'] = pd.cut(df['Age'].astype(int), 5)
     
     return df
