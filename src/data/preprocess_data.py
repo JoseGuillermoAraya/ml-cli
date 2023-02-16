@@ -152,3 +152,22 @@ def create_feature_from_column(df, feature, title, function):
     df[title] = df[feature].apply(function)
     
     return df
+
+def encode_categorical_features(df, features):
+    """One hot encode categorical features.
+    
+    Args:
+        df (pandas.DataFrame): Dataframe containing the data.
+        features (list): List of features to encode.
+        
+    Returns:
+        df (pandas.DataFrame): Dataframe containing the data with encoded categorical features.
+    """
+    encoder = OneHotEncoder(sparse_output=False)
+    encoded_columns = encoder.fit_transform(df[features])
+    new_columns = encoder.get_feature_names_out(features)
+    encoded_df = pd.DataFrame(encoded_columns, columns=new_columns)
+    df = pd.concat([df, encoded_df], axis=1)
+    df = df.drop(features, axis=1)
+
+    return df
