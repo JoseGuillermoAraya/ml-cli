@@ -172,7 +172,7 @@ def encode_categorical_features(df, features):
 
     return df
 
-def preprocess_data(X, y):
+def preprocess_data(X):
     """Preprocess data.
 
     Args:
@@ -210,4 +210,4 @@ def preprocess_data(X, y):
     # Drop features
     X = drop_features(X, ['Name', 'Age', 'Fare', 'Ticket'])
 
-    return X, y
+    return X
