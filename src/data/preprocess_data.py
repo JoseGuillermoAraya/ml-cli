@@ -177,11 +177,9 @@ def preprocess_data(X):
 
     Args:
         X (pandas.DataFrame): Dataframe containing the features.
-        y (pandas.DataFrame): Dataframe containing the labels.
 
     Returns:
         X (pandas.DataFrame): Dataframe containing the features.
-        y (pandas.DataFrame): Dataframe containing the labels.
     """
 
     # Drop features
