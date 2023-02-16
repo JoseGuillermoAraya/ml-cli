@@ -174,8 +174,8 @@ def encode_categorical_features(df, features):
 
 def main():
     # Read data
-    train_df = pd.read_csv('data/train.csv')
-    test_df = pd.read_csv('data/test.csv')
+    train_df = pd.read_csv('data/raw/train.csv')
+    test_df = pd.read_csv('data/raw/test.csv')
 
     # Drop features
     features_to_drop = ['PassengerId', 'Cabin']
