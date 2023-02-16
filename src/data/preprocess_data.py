@@ -86,7 +86,7 @@ def encode_categorical_data(df):
     return df
 
 def create_title_feature(df):
-    """Create title feature.
+    """Create title feature. using create_feature_from_column.
     
     Args:
         df (pandas.DataFrame): Dataframe containing the data.
@@ -95,7 +95,7 @@ def create_title_feature(df):
         df (pandas.DataFrame): Dataframe containing the data with title feature.
     """
     # Create title feature
-    df['Title'] = df['Name'].str.split(", ", expand=True)[1].str.split(".", expand=True)[0]
+    df = create_feature_from_column(df, 'Name', 'Title', lambda x: x.split(',')[1].split('.')[0].strip())
     
     return df
 
@@ -148,6 +148,23 @@ def create_feature_sum(df, features, title, const=0):
     """
     # Create feature sum
     df[title] = df[features].sum(axis=1) + const
+    
+    return df
+
+def create_feature_from_column(df, feature, title, function):
+    """Create feature from column.
+    
+    Args:
+        df (pandas.DataFrame): Dataframe containing the data.
+        feature (str): Feature to create feature from.
+        title (str): Title of feature.
+        function (function): Function to apply to feature.
+
+    Returns:
+        df (pandas.DataFrame): Dataframe containing the data with feature.
+    """
+    # Create feature from column
+    df[title] = df[feature].apply(function)
     
     return df
 
