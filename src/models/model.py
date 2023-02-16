@@ -11,7 +11,7 @@ class TitanicXGBModel:
         self.target_name = None
         self.feature_importance = None
         
-    def train(self, X_train, y_train):
+    def fit(self, X_train, y_train):
         dtrain = xgb.DMatrix(X_train, label=y_train)
         self.target_name = y_train.name
         self.feature_names = X_train.columns
