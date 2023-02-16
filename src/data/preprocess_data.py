@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OrdinalEncoder
 
 def drop_features(df, features):
     """Drop features from the data.
@@ -113,6 +114,23 @@ def group_titles(df):
     df['Title'] = df['Title'].replace(['Lady', 'Mme', 'the Countess'], 'Mrs')
     df['Title'] = df['Title'].replace(['Sir', 'Major', 'Dr', 'Don'], 'Mr')
     
+    return df
+def create_band_feature(df, feature, title, bins=5):
+    """Create band feature. Encode the feature into a ordinal categorical feature with scikit learn
+    
+    Args:
+        df (pandas.DataFrame): Dataframe containing the data.
+        feature (str): Feature to create band feature from.
+        title (str): Title of band feature.
+        bins (int): Number of bins to create band feature from.
+        
+    Returns:
+        df (pandas.DataFrame): Dataframe containing the data with band feature.
+    """
+    # Create band feature
+    df[title] = pd.cut(df[feature].astype(int), bins)
+    df[title] = OrdinalEncoder().fit_transform(df[title].values.reshape(-1, 1))
+
     return df
 
 def feature_engineering(df):
