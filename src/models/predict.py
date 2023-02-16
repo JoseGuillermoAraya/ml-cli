@@ -1,11 +1,11 @@
 import pandas as pd
 import joblib
 
-def predict(input_data, model_name):
+def predict(input_data, model_path):
     """Loads a trained model and uses it to make predictions on new data"""
     
     # Load trained model
-    model = joblib.load(f"../../data/models/{model_name}")
+    model = joblib.load(model_path)
     
     # Load input data
     data = pd.read_csv(input_data)

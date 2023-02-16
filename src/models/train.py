@@ -1,7 +1,7 @@
 import joblib
 from src.models.model import TitanicXGBModel
 
-def train_model(X_train, y_train, model_name, model_params):
+def train_model(X_train, y_train, model_path, model_params):
     # Instantiate the model with the provided parameters
     model = TitanicXGBModel(model_params)
 
@@ -9,6 +9,6 @@ def train_model(X_train, y_train, model_name, model_params):
     model.fit(X_train, y_train)
 
     # Save the model to disk
-    joblib.dump(model, f"../../data/models/{model_name}")
+    joblib.dump(model, model_path)
 
-    print(f"Model saved to ./data/models/{model_name}")
+    print(f"Model saved to {model_path}")
