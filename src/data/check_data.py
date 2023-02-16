@@ -121,3 +121,16 @@ def average_and_count_column_by_feature(df, column, feature):
     # Average and count column by feature
     df = df.groupby(feature)[column].agg(['mean', 'count'])
     return df
+
+def check_feature_of_missing_column(df, column, feature):
+    """Check feature of missing column in the data.
+    
+    Args:
+        df (pandas.DataFrame): Dataframe containing the data.
+        
+    Returns:
+        df (pandas.DataFrame): Dataframe containing the data with feature of missing column.
+    """
+    # Check feature of missing column
+    df = df[df[column].isnull()][feature].value_counts()
+    return df
