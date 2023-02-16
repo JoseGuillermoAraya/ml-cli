@@ -77,6 +77,23 @@ def create_title_feature(df):
     
     return df
 
+def group_titles(df):
+    """Group titles.
+    
+    Args:
+        df (pandas.DataFrame): Dataframe containing the data.
+        
+    Returns:
+        df (pandas.DataFrame): Dataframe containing the data with grouped titles.
+    """
+    # Group titles
+    df['Title'] = df['Title'].replace(['Rev', 'Col', 'Jonkheer', 'Capt'], 'Other')
+    df['Title'] = df['Title'].replace(['Dona', 'Mlle', 'Ms'], 'Miss')
+    df['Title'] = df['Title'].replace(['Lady', 'Mme', 'the Countess'], 'Mrs')
+    df['Title'] = df['Title'].replace(['Sir', 'Major', 'Dr', 'Don'], 'Mr')
+    
+    return df
+
 def feature_engineering(df):
     """Feature engineering.
     
