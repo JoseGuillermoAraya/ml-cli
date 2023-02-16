@@ -109,22 +109,15 @@ def check_correlation(df):
     df = df.corr(numeric_only=True)
     return df
 
-def check_and_group_unique_titles(df):
-    """Check and group unique titles in the data.
+def average_and_count_column_by_feature(df, column, feature):
+    """Average and count column by feature in the data.
     
     Args:
         df (pandas.DataFrame): Dataframe containing the data.
         
     Returns:
-        df (pandas.DataFrame): Dataframe containing the data with unique titles.
+        df (pandas.DataFrame): Dataframe containing the data with average and count column by feature.
     """
-    # Check and group unique titles
-    titles = df['Name'].str.split(", ", expand=True)[1].str.split(".", expand=True)[0]
-    preliminar_count = titles.value_counts()
-    new_titles = titles.replace([ 'Col', 'Jonkheer', 'Rev'], 'Other')
-    new_titles = new_titles.replace(['Lady', 'Mme', 'the Countess'], 'Mrs')
-    new_titles = new_titles.replace(['Dona', 'Mlle', 'Ms'], 'Miss')
-    new_titles = new_titles.replace(['Master', 'Sir', 'Capt', 'Major', 'Dr', 'Don'], 'Mr')
-    final_count = new_titles.value_counts()
-
-    return preliminar_count, final_count
+    # Average and count column by feature
+    df = df.groupby(feature)[column].agg(['mean', 'count'])
+    return df
