@@ -63,6 +63,20 @@ def encode_categorical_data(df):
     
     return df
 
+def create_title_feature(df):
+    """Create title feature.
+    
+    Args:
+        df (pandas.DataFrame): Dataframe containing the data.
+        
+    Returns:
+        df (pandas.DataFrame): Dataframe containing the data with title feature.
+    """
+    # Create title feature
+    df['Title'] = df['Name'].str.split(", ", expand=True)[1].str.split(".", expand=True)[0]
+    
+    return df
+
 def feature_engineering(df):
     """Feature engineering.
     
