@@ -115,6 +115,7 @@ def group_titles(df):
     df['Title'] = df['Title'].replace(['Sir', 'Major', 'Dr', 'Don'], 'Mr')
     
     return df
+
 def create_band_feature(df, feature, title, bins=5):
     """Create band feature. Encode the feature into a ordinal categorical feature with scikit learn
     
@@ -131,6 +132,23 @@ def create_band_feature(df, feature, title, bins=5):
     df[title] = pd.cut(df[feature].astype(int), bins)
     df[title] = OrdinalEncoder().fit_transform(df[title].values.reshape(-1, 1))
 
+    return df
+
+def create_feature_sum(df, features, title, const=0):
+    """Create feature sum.
+    
+    Args:
+        df (pandas.DataFrame): Dataframe containing the data.
+        features (list): List of features to sum.
+        const (int): Constant to add to feature sum.
+        title (str): Title of feature sum.
+        
+    Returns:
+        df (pandas.DataFrame): Dataframe containing the data with feature sum.
+    """
+    # Create feature sum
+    df[title] = df[features].sum(axis=1) + const
+    
     return df
 
 def feature_engineering(df):
