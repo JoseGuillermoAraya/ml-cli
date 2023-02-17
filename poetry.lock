@@ -1386,6 +1386,14 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "unittest"
+version = "0.0"
+description = ""
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "uri-template"
 version = "1.2.0"
 description = "RFC 6570 URI Template Processor"
@@ -1464,7 +1472,7 @@ scikit-learn = ["scikit-learn"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "6a435898f75d5e290a51ba19648d8e4f77d2ef094062a46728a90e45b1349d5f"
+content-hash = "77b0541d868a81a3909def41404c2c1774a9ed9b1a62a6d9d06e69176ae7c732"
 
 [metadata.files]
 anyio = [
@@ -2547,6 +2555,9 @@ traitlets = [
 typing-extensions = [
     {file = "typing_extensions-4.5.0-py3-none-any.whl", hash = "sha256:fb33085c39dd998ac16d1431ebc293a8b3eedd00fd4a32de0ff79002c19511b4"},
     {file = "typing_extensions-4.5.0.tar.gz", hash = "sha256:5cb5f4a79139d699607b3ef622a1dedafa84e115ab0024e0d9c044a9479ca7cb"},
+]
+unittest = [
+    {file = "unittest2-0.0.0.tar.gz", hash = "sha256:1b492484bea7f68abda5fcc61412e77b6a105e5842355d630f8b75f01add3555"},
 ]
 uri-template = [
     {file = "uri_template-1.2.0-py3-none-any.whl", hash = "sha256:f1699c77b73b925cf4937eae31ab282a86dc885c333f2e942513f08f691fc7db"},
