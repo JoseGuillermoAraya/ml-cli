@@ -29,7 +29,7 @@ class TitanicXGBModel:
     def evaluate(self, X_test, y_test):
         y_pred = self.predict(X_test)
         accuracy = accuracy_score(y_test, y_pred.round())
-        print(f"Accuracy: {accuracy:.2f}")
+        return accuracy
     
     def cross_validate(self, X, y, cv=5, scoring='accuracy'):
         scores = cross_val_score(self.model, X, y, cv=cv, scoring=scoring)
