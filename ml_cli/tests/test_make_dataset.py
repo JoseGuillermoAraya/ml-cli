@@ -1,4 +1,3 @@
-import pytest
 from ml_cli.data.make_dataset import *
 
 def test_load_data():
