@@ -1,3 +1,4 @@
+import joblib
 import xgboost as xgb
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score
@@ -18,7 +19,7 @@ class TitanicXGBModel:
         self.model = xgb.train(self.params, dtrain)
     
     def save(self, filename):
-        self.model.save_model(filename)
+        joblib.dump(self, filename)
 
     def predict(self, X_test):
         dtest = xgb.DMatrix(X_test)
