@@ -54,21 +54,6 @@ def impute_missing_values(df, feature, strategy='mean'):
     
     return df
 
-def encode_categorical_data(df):
-    """Encode categorical data.
-    
-    Args:
-        df (pandas.DataFrame): Dataframe containing the data.
-        
-    Returns:
-        df (pandas.DataFrame): Dataframe containing the data with encoded categorical data.
-    """
-    # Encode categorical data
-    encoder = OneHotEncoder(sparse=False)
-    df = pd.DataFrame(encoder.fit_transform(df), columns=encoder.get_feature_names())
-    
-    return df
-
 def create_title_feature(df):
     """Create title feature. using create_feature_from_column.
     
