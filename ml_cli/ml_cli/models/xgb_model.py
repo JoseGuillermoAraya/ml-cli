@@ -16,7 +16,10 @@ class TitanicXGBModel:
         self.target_name = y_train.name
         self.feature_names = X_train.columns
         self.model = xgb.train(self.params, dtrain)
-        
+    
+    def save(self, filename):
+        self.model.save_model(filename)
+
     def predict(self, X_test):
         dtest = xgb.DMatrix(X_test)
         y_pred = self.model.predict(dtest)
