@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "ml-cli"
+version = "0.1.0"
+description = "Simple CLI to train, evaluate and predict with a XGB model on the Titanic Problem"
+authors = ["JoseGuillermoAraya <jose.araya@bci.cl>"]
+readme = "README.md"
+packages = [{include = "ml_cli"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+click = "^8.1.3"
+joblib = "^1.2.0"
+pandas = "^1.5.3"
+sklearn = "^0.0.post1"
+xgboost = "^1.7.4"
+logging = "^0.4.9.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
