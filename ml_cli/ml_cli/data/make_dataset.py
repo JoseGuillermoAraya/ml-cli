@@ -5,10 +5,6 @@ def load_data(path):
     df = pd.read_csv(path)
     return df
 
-def save_data(df, path):
-    """Save data to path"""
-    df.to_csv(path, index=False)
-
 def split_data(df, target):
     """Split data into X and y"""
     X = df.drop(target, axis=1)
