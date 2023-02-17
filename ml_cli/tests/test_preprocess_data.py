@@ -118,4 +118,31 @@ def test_encode_categorical_features():
     # Test output
     assert df.shape == (initial_shape[0], initial_shape[1] + sum_unique_values - len(features_to_encode))
     assert all([feature not in df.columns for feature in features_to_encode])
-    
+
+def test_preprocess_data():
+    """Test preprocess_data function"""
+    df = load_data('./tests/data/titanic.csv')
+    initial_shape = df.shape
+    X = preprocess_data(df)
+
+    print(X.columns)
+    # Test output
+    assert X.shape == (initial_shape[0], initial_shape[1] + 6)
+    assert 'Name' not in X.columns
+    assert 'Ticket' not in X.columns
+    assert 'Cabin' not in X.columns
+    assert 'Age' not in X.columns
+    assert 'PassengerId' not in X.columns
+    assert 'AgeBand' in X.columns
+    assert 'FamilySize' in X.columns
+    assert 'Sex_female' in X.columns
+    assert 'Sex_male' in X.columns
+    assert 'Embarked_C' in X.columns
+    assert 'Embarked_Q' in X.columns
+    assert 'Embarked_S' in X.columns
+    assert 'Title_Master' in X.columns
+    assert 'Title_Miss' in X.columns
+    assert 'Title_Mr' in X.columns
+    assert 'Title_Mrs' in X.columns
+    assert 'Title_Other' in X.columns
+
