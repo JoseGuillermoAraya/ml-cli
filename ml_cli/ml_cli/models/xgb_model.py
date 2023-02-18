@@ -24,14 +24,17 @@ class TitanicXGBModel:
         logger.debug(f"Saving XGBoost model to {filename}")
         joblib.dump(self, filename)
 
-    def predict(self, X_test):
+    def predict(self, X_test, probability=False):
         logger.debug("Predicting with XGBoost model")
         if self.model is None:
             logger.error("XGBoost model is not trained yet")
             raise ValueError("XGBoost model is not trained yet")
         dtest = xgb.DMatrix(X_test)
         y_pred = self.model.predict(dtest)
-        return pd.Series(y_pred, name=self.target_name)
+        if probability:
+            return pd.Series(y_pred, name=self.target_name)
+        else:
+            return pd.Series(y_pred.round(), name=self.target_name)
 
     def get_feature_importance(self):
         logger.debug("Getting feature importance from XGBoost model")
