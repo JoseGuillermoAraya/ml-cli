@@ -2,7 +2,7 @@ import click
 import pandas as pd
 import joblib
 from ml_cli.utils.logger import get_logger
-from ml_cli.utils.metrics import evaluate
+from ml_cli.utils.metrics import evaluate as metrics_evaluate
 from ml_cli.data.make_dataset import make_dataset
 from ml_cli.data.preprocess_data import preprocess_data
 
@@ -29,7 +29,7 @@ def evaluate(input_file, model_file, output_file, log_file):
     # Make predictions and evaluate the model
     logger.info('Making predictions and evaluating model...')
     y_pred = model.predict(X)
-    results = evaluate(y_true, y_pred)
+    results = metrics_evaluate(y_true, y_pred)
 
     # Save the evaluation results to a CSV file
     logger.info(f'Saving evaluation results to {output_file}...')
