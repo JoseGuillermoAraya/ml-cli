@@ -1,4 +1,5 @@
 import joblib
+import pandas as pd
 import xgboost as xgb
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score
@@ -22,14 +23,11 @@ class TitanicXGBModel:
         joblib.dump(self, filename)
 
     def predict(self, X_test):
+        if self.model is None:
+            raise ValueError("XGBoost model is not trained yet")
         dtest = xgb.DMatrix(X_test)
         y_pred = self.model.predict(dtest)
-        return y_pred
-        
-    def evaluate(self, X_test, y_test):
-        y_pred = self.predict(X_test)
-        accuracy = accuracy_score(y_test, y_pred.round())
-        return accuracy
+        return pd.Series(y_pred, name=self.target_name)
     
     def cross_validate(self, X, y, cv=5, scoring='accuracy'):
         scores = cross_val_score(self.model, X, y, cv=cv, scoring=scoring)
