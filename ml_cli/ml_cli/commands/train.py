@@ -27,7 +27,7 @@ def train(data_file, log_file, model_file, **params):
     logger = get_logger(__name__, log_file)
     # load and preprocess the input data
     logger.info('Loading and preprocessing data...')
-    X, y = make_dataset(data_file)
+    X, y = make_dataset(data_file, 'Survived')
     X = preprocess_data(X)
 
     # create a new instance of the model and train it on the data
