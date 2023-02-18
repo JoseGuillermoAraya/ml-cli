@@ -2,6 +2,9 @@ import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import OrdinalEncoder
+from ml_cli.utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 def drop_features(df, features):
     """Drop features from the data.
@@ -13,6 +16,7 @@ def drop_features(df, features):
     Returns:
         df (pandas.DataFrame): Dataframe containing the data with dropped features.
     """
+    logger.debug(f"Dropping features {features} from data")
     # Drop features
     df = df.drop(features, axis=1)
     
@@ -30,6 +34,7 @@ def impute_feature_with_mean_of_group(df, feature, group):
     Returns:
         df (pandas.DataFrame): Dataframe containing the data with imputed feature.
     """
+    logger.debug(f"Imputing feature {feature} with mean of that feature for a group of {group} feature")
     # Impute feature with mean of that feature for a group of another feature
     imputer = SimpleImputer(strategy='mean')
     grouped = df.groupby(group)[feature].transform(lambda x: x.fillna(x.mean()))
@@ -48,6 +53,7 @@ def impute_missing_values(df, feature, strategy='mean'):
     Returns:
         df (pandas.DataFrame): Dataframe containing the data with imputed feature.
     """
+    logger.debug(f"Imputing missing values in feature {feature} with strategy {strategy}")
     # Impute missing values
     imputer = SimpleImputer(strategy=strategy)
     df[feature] = imputer.fit_transform(df[feature].values.reshape(-1, 1))
@@ -63,6 +69,7 @@ def create_title_feature(df):
     Returns:
         df (pandas.DataFrame): Dataframe containing the data with title feature.
     """
+    logger.debug(f"Creating title feature from Name feature")
     # Create title feature
     df = create_feature_from_column(df, 'Name', 'Title', lambda x: x.split(',')[1].split('.')[0].strip())
     
@@ -77,6 +84,7 @@ def group_titles(df):
     Returns:
         df (pandas.DataFrame): Dataframe containing the data with grouped titles.
     """
+    logger.debug(f"Grouping titles")
     # Group titles
     df['Title'] = df['Title'].replace(['Rev', 'Col', 'Jonkheer', 'Capt'], 'Other')
     df['Title'] = df['Title'].replace(['Dona', 'Mlle', 'Ms'], 'Miss')
@@ -97,6 +105,7 @@ def create_band_feature(df, feature, title, bins=5):
     Returns:
         df (pandas.DataFrame): Dataframe containing the data with band feature.
     """
+    logger.debug(f"Creating band feature from {feature} feature")
     # Create band feature
     df[title] = pd.cut(df[feature].astype(int), bins)
     df[title] = OrdinalEncoder().fit_transform(df[title].values.reshape(-1, 1))
@@ -115,6 +124,7 @@ def create_feature_sum(df, features, title, const=0):
     Returns:
         df (pandas.DataFrame): Dataframe containing the data with feature sum.
     """
+    logger.debug(f"Creating feature sum from {features} features")
     # Create feature sum
     df[title] = df[features].sum(axis=1) + const
     
@@ -132,6 +142,7 @@ def create_feature_from_column(df, feature, title, function):
     Returns:
         df (pandas.DataFrame): Dataframe containing the data with feature.
     """
+    logger.debug(f"Creating feature {title} from {feature} feature")
     # Create feature from column
     df[title] = df[feature].apply(function)
     
@@ -147,6 +158,7 @@ def encode_categorical_features(df, features):
     Returns:
         df (pandas.DataFrame): Dataframe containing the data with encoded categorical features.
     """
+    logger.debug(f"Encoding categorical features {features}")
     encoder = OneHotEncoder(sparse_output=False)
     encoded_columns = encoder.fit_transform(df[features])
     new_columns = encoder.get_feature_names_out(features)
@@ -165,7 +177,7 @@ def preprocess_data(X):
     Returns:
         X (pandas.DataFrame): Dataframe containing the features.
     """
-
+    logger.debug(f"Preprocessing data")
     # Drop features
     features_to_drop = ['PassengerId', 'Cabin']
     X = drop_features(X, features_to_drop)
