@@ -29,8 +29,9 @@ class TitanicXGBModel:
         y_pred = self.model.predict(dtest)
         return pd.Series(y_pred, name=self.target_name)
     
-    def cross_validate(self, X, y, cv=5, scoring='accuracy'):
-        scores = cross_val_score(self.model, X, y, cv=cv, scoring=scoring)
+    def cross_validate(self, X, y, cv=5, scoring="accuracy"):
+        dtrain = xgb.DMatrix(X, label=y)
+        scores = cross_val_score(self.model, dtrain, y, cv=cv, scoring=scoring)
         return scores.mean()
 
     def get_feature_importance(self):
