@@ -20,6 +20,9 @@ def test_predict(tmpdir):
     output_data = pd.read_csv(output_file)
     assert len(output_data) == 183
     assert 'predictions' in output_data.columns
+    
+    # check that predictions are binary
+    assert set(output_data['predictions'].unique()) == {0, 1}
 
     # Clean up the output file
     os.remove(output_file)
