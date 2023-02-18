@@ -39,3 +39,6 @@ Options:
 - `'--output-file'`, default='evaluation_results.csv', Path to the output CSV file
 - `'--log-file'`, default='evaluate.log', Path to the log file
 Evaluate the model with accuracy, precission, f1, recall, auc
+
+## Tests and coverage
+`poetry run test`
