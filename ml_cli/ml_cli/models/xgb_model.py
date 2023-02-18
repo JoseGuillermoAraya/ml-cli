@@ -30,10 +30,15 @@ class TitanicXGBModel:
         return pd.Series(y_pred, name=self.target_name)
 
     def get_feature_importance(self):
-        if self.model is not None and self.feature_names is not None:
-            importance = self.model.get_score(importance_type='gain')
-            importance = {self.feature_names[int(k[1:])] : v for k, v in importance.items()}
-            self.feature_importance = importance
-            return importance
-        else:
-            raise ValueError("The model has not been trained yet")
+        if self.model is None or self.feature_names is None:
+            raise ValueError("XGBoost model is not trained yet or feature names are not available")
+        importance = self.model.get_score(importance_type='gain')
+        importance = pd.Series(importance, name='importance')
+        importance.index.name = 'feature'
+        importance = importance.reset_index()
+        importance = importance.sort_values('importance', ascending=False)
+        importance['importance'] = importance['importance'] / importance['importance'].sum()
+        importance = importance.set_index('feature')
+        importance = importance['importance']
+        importance = importance.reindex(self.feature_names, fill_value=0)
+        return importance
