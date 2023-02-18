@@ -1,8 +1,8 @@
 import click
-from data.make_dataset import make_dataset
-from data.preprocess_data import preprocess_data
-from models.xgb_model import TitanicXGBModel
-from utils.logger  import MyLogger
+from ml_cli.data.make_dataset import make_dataset
+from ml_cli.data.preprocess_data import preprocess_data
+from ml_cli.models.xgb_model import TitanicXGBModel
+from ml_cli.utils.logger  import get_logger
 
 @click.command()
 @click.option('--data-file', required=True, help='Path to the input data file')
@@ -24,9 +24,7 @@ def train(data_file, log_file, model_file, **params):
     """
     Trains a XGB model on the input data.
     """
-    # create a logger object and set up the logging configuration
-    logger = MyLogger(log_file)
-
+    logger = get_logger(__name__, log_file)
     # load and preprocess the input data
     logger.info('Loading and preprocessing data...')
     X, y = make_dataset(data_file)

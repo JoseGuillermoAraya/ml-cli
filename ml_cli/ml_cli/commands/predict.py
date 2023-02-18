@@ -1,8 +1,8 @@
 import click
 import joblib
 import pandas as pd
-from data.preprocess_data import preprocess_data
-from utils.logger  import MyLogger
+from ml_cli.data.preprocess_data import preprocess_data
+from ml_cli.utils.logger  import get_logger
 
 # Define the command-line interface using Click
 @click.command()
@@ -11,9 +11,7 @@ from utils.logger  import MyLogger
 @click.option('--model-file', default='model.bin', help='Path to the trained model')
 @click.option('--log-file', default='predict.log', help='Path to the log file')
 def predict(input_file, output_file, model_file, log_file):
-    # create a logger object and set up the logging configuration
-    logger = MyLogger(log_file)
-
+    logger = get_logger(__name__, log_file)
     # Load the XGBoost model
     logger.info(f'Loading model from {model_file}...')
     model = joblib.load(model_file)
