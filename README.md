@@ -2,10 +2,10 @@
 This package contains a CLI to train and evaluate a ML model over the titanic problem data
 Made using `poetry`
 
-It has 3 commands:
+It has 4 commands:
 
 ## Train
-`python cli.py train`
+`ml_cli train`
 Options:
 - `'--data-file'`, required=True, Path to the input data file
 - `'--log-file'`, default='train.log', Path to the log file
@@ -24,7 +24,7 @@ Options:
 To train the model on some data
 
 ## Predict
-`python cli.py predict`
+`ml_cli predict`
 Options:
 - `'--input_file'`, required=True, Path to the input CSV file
 - `'--output_file'`, default='predictions.csv', Path to the output CSV file
@@ -33,13 +33,19 @@ Options:
 Predict target values from input data
 
 ## Evaluate
-`python cli.py evaluate`
+`ml_cli evaluate`
 Options:
 - `'--input-file'`, required=True, Path to the input CSV file
 - `'--model-file'`, required=True, Path to the trained model
 - `'--output-file'`, default='evaluation_results.csv', Path to the output CSV file
 - `'--log-file'`, default='evaluate.log', Path to the log file
 Evaluate the model with accuracy, precission, f1, recall, auc
+
+## Get feature importance
+`ml_cli get-feature-importance`
+Options:
+- `'--model-file'`, Path to the trained model
+- `'--output-file'`, Path to the output file
 
 ## Tests and coverage
 `poetry run test`
