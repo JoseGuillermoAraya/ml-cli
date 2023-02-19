@@ -42,3 +42,4 @@ Evaluate the model with accuracy, precission, f1, recall, auc
 
 ## Tests and coverage
 `poetry run test`
+Coverage will be shown in terminal and saved in html format to `./coverage-report`
