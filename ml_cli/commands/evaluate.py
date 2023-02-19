@@ -7,14 +7,11 @@ from ml_cli.data.make_dataset import make_dataset
 from ml_cli.data.preprocess_data import preprocess_data
 
 @click.command()
-@click.argument('input_file', type=click.Path(exists=True), help='Path to the input data file')
-@click.argument('output_file', type=click.Path(exists=True), help='Path to the output predictions file')
-@click.argument('model_file', type=click.Path(exists=True), help='Path to the trained model file')
+@click.argument('input_file', type=click.Path(exists=True))
+@click.argument('output_file', type=click.Path(exists=True))
+@click.argument('model_file', type=click.Path(exists=True))
 @click.option('--log-file', default='evaluate.log', help='Path to the log file')
 def evaluate(input_file, model_file, output_file, log_file):
-    """
-    Evaluates a trained model.
-    """
     logger = get_logger(__name__, log_file)
 
     # Load the trained model
