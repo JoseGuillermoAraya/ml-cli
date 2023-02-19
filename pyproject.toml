@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ml-cli"
-version = "0.3.0"
+version = "0.4.0"
 description = "Simple CLI to train, evaluate and predict with a XGB model on the Titanic Problem"
 authors = ["JoseGuillermoAraya <jose.araya@bci.cl>"]
 readme = "README.md"
