@@ -7,9 +7,9 @@ from ml_cli.data.make_dataset import make_dataset
 from ml_cli.data.preprocess_data import preprocess_data
 
 @click.command()
-@click.argument('input_file', type=click.Path(exists=True))
-@click.argument('output_file', type=click.Path(exists=True))
-@click.argument('model_file', type=click.Path(exists=True))
+@click.option('--input-file', type=click.Path(exists=True), required=True, help='Path to the input CSV file')
+@click.option('--model-file', type=click.Path(exists=True), required=True, help='Path to the trained model')
+@click.option('--output-file', type=click.Path(), default='evaluation_results.csv', help='Path to the output CSV file')
 @click.option('--log-file', default='evaluate.log', help='Path to the log file')
 def evaluate(input_file, model_file, output_file, log_file):
     logger = get_logger(__name__, log_file)

@@ -5,9 +5,9 @@ from ml_cli.models.xgb_model import TitanicXGBModel
 from ml_cli.utils.logger  import get_logger
 
 @click.command()
-@click.argument('data_file', type=click.Path(exists=True))
-@click.argument('model_file', type=click.Path(exists=True))
+@click.option('--data-file', required=True, help='Path to the input data file')
 @click.option('--log-file', default='train.log', help='Path to the log file')
+@click.option('--model-file', default='model.pkl', help='Path to save the trained model')
 @click.option('--max_depth', default=3, help='Maximum depth of a tree')
 @click.option('--learning_rate', default=0.1, help='Learning rate')
 @click.option('--objective', default='binary:logistic', help='Objective function')
