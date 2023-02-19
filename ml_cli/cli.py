@@ -11,7 +11,7 @@ def cli():
 cli.add_command(evaluate)
 cli.add_command(predict)
 cli.add_command(train)
-cli.add.command(get_feature_importance)
+cli.add_command(get_feature_importance)
 
 if __name__ == '__main__':
     cli()
