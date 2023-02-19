@@ -48,3 +48,6 @@ Coverage will be shown in terminal and saved in html format to `./coverage-repor
 ## Building the package
 `poetry build`
 Package saves in `./dist`
+
+## Installation
+`poetry install`
