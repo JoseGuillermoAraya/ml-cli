@@ -6,9 +6,9 @@ from ml_cli.utils.logger  import get_logger
 
 # Define the command-line interface using Click
 @click.command()
-@click.option('--input_file', type=click.Path(exists=True), required=True, help='Path to the input CSV file')
-@click.option('--output_file', type=click.Path(), default='predictions.csv', help='Path to the output CSV file')
-@click.option('--model-file', default='model.bin', help='Path to the trained model')
+@click.argument('input_file', type=click.Path(exists=True))
+@click.argument('output_file', type=click.Path(exists=True))
+@click.argument('model_file', type=click.Path(exists=True))
 @click.option('--log-file', default='predict.log', help='Path to the log file')
 def predict(input_file, output_file, model_file, log_file):
     logger = get_logger(__name__, log_file)
