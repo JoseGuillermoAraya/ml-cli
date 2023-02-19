@@ -1,6 +1,6 @@
-from commands.evaluate import evaluate
-from commands.predict import predict
-from commands.train import train
+from ml_cli.commands.evaluate import evaluate
+from ml_cli.commands.predict import predict
+from ml_cli.commands.train import train
 import click
 
 @click.group()
