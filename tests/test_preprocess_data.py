@@ -2,6 +2,21 @@ from ml_cli.data.preprocess_data import *
 from ml_cli.data.make_dataset import load_data
 import numpy as np
 
+def test_drop_na_rows():
+    """Test drop_na_rows function"""
+    # Load data
+    df = load_data('./tests/data/titanic.csv')
+    
+    # Check for null values on age
+    assert df['Age'].isnull().sum() > 0
+    
+    # Drop rows with missing values
+    df = drop_na_rows(df, 'Age')
+    
+    # Test output
+    assert df.shape == (714, 12)
+    assert df['Age'].isnull().sum() == 0
+
 def test_drop_features():
     """Test drop_features function"""
     # Load data

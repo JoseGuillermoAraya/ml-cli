@@ -6,6 +6,22 @@ from ml_cli.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
+def drop_na_rows(df, feature):
+    """Drop rows with missing values in the data.
+    
+    Args:
+        df (pandas.DataFrame): Dataframe containing the data.
+        feature (str): Feature to drop rows with missing values.
+        
+    Returns:
+        df (pandas.DataFrame): Dataframe containing the data with dropped rows.
+    """
+    logger.debug(f"Dropping rows with missing values in feature {feature}")
+    # Drop rows with missing values
+    df = df.dropna(subset=[feature])
+    
+    return df
+
 def drop_features(df, features):
     """Drop features from the data.
     
@@ -178,6 +194,9 @@ def preprocess_data(X):
         X (pandas.DataFrame): Dataframe containing the features.
     """
     logger.debug(f"Preprocessing data")
+    # Drop NA values of features that will not be imputed
+    X = drop_na_rows(X, "Fare")
+
     # Drop features
     features_to_drop = ['PassengerId', 'Cabin']
     X = drop_features(X, features_to_drop)
