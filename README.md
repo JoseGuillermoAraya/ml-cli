@@ -1,5 +1,6 @@
 # ml_cli
 This package contains a CLI to train and evaluate a ML model over the titanic problem data
+Made using `poetry`
 
 It has 3 commands:
 
@@ -43,3 +44,7 @@ Evaluate the model with accuracy, precission, f1, recall, auc
 ## Tests and coverage
 `poetry run test`
 Coverage will be shown in terminal and saved in html format to `./coverage-report`
+
+## Building the package
+`poetry build`
+Package saves in `./dist`
