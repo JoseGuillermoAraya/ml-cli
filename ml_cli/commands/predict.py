@@ -6,11 +6,14 @@ from ml_cli.utils.logger  import get_logger
 
 # Define the command-line interface using Click
 @click.command()
-@click.argument('input_file', type=click.Path(exists=True))
-@click.argument('output_file', type=click.Path(exists=True))
-@click.argument('model_file', type=click.Path(exists=True))
+@click.argument('input_file', type=click.Path(exists=True), help='Path to the input data file')
+@click.argument('output_file', type=click.Path(exists=True), help='Path to the output predictions file')
+@click.argument('model_file', type=click.Path(exists=True), help='Path to the trained model file')
 @click.option('--log-file', default='predict.log', help='Path to the log file')
 def predict(input_file, output_file, model_file, log_file):
+    """
+    Makes predictions using a trained XGBoost model.
+    """
     logger = get_logger(__name__, log_file)
     # Load the XGBoost model
     logger.info(f'Loading model from {model_file}...')
